@@ -100,6 +100,8 @@ def update_user():
         req_data = request.get_json()
 
         # Checking input's
+        gender_ = 0
+
         if req_data["fname"] == "" or len(req_data["fname"]) < 4:
             return jsonify({"error":"Check the firstname,firstname chars should be 4"}), 421
 
@@ -117,8 +119,16 @@ def update_user():
             return jsonify({"error":"Mobile number chars should be 4"}), 421
 
 
-        elif req_data["gender"] != "male" or req_data["gender"] != "female":
+
+        if req_data["gender"] != "female":
+            gender_ += 1 
+
+        elif req_data["gender"] != "male":
+            gender_ += 1 
+
+        if gender_ != 1:
             return jsonify({"error":"gender should be male or female"}), 421
+
 
         user_found = False
 
